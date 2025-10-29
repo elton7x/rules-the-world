@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+body {
+  @apply bg-black text-white;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer utilities {
+  @keyframes pulse-bright {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 12px theme('colors.green.500'), 0 0 24px theme('colors.green.500'), 0 0 35px theme('colors.green.700');
+    }
+    50% {
+      transform: scale(1.03);
+      box-shadow: 0 0 24px theme('colors.green.400'), 0 0 35px theme('colors.green.600'), 0 0 45px theme('colors.green.800');
+    }
+  }
+
+  .animate-pulse-bright {
+    animation: pulse-bright 2.5s infinite;
+  }
+}
