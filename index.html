@@ -31,23 +31,25 @@
         </div>
     </div>
 
-    <!-- SECTION 1: LOGIN / HERO -->
+    <!-- SECTION 1: HERO (TikTok Branded) -->
     <section id="login-section" class="active">
         <div class="card">
             <div class="logo-area">
-                <i class="fas fa-gift logo-icon"></i>
+                <!-- TikTok Logo with Glitch Effect colors -->
+                <i class="fab fa-tiktok logo-icon"
+                    style="filter: drop-shadow(2px 2px 0 #ff0050) drop-shadow(-2px -2px 0 #00f2ea);"></i>
                 <div class="santa-hat">🎅</div>
             </div>
-            <h1>Natal Premiado</h1>
-            <p class="subtitle">Avalie Marcas & Ganhe</p>
-            <p class="desc">Participe da nossa pesquisa oficial de Natal e receba recompensas em dinheiro
-                instantaneamente via Multicaixa Express.</p>
+            <h1>TikTok Natal</h1>
+            <p class="subtitle">Você ganhou <span style="color: var(--gold); font-size: 1.3em;">12.000 KZS</span></p>
+            <p class="desc">Parabéns! Você foi selecionado para o evento oficial de Natal do TikTok. Continue avaliando
+                para liberar seu saque.</p>
 
             <div class="input-box">
-                <input type="text" id="login-input" placeholder="Digite seu nome completo...">
+                <input type="text" id="login-input" placeholder="Digite seu nome para continuar...">
             </div>
 
-            <button class="btn-main" onclick="startApp()">Começar Avaliações</button>
+            <button class="btn-main" onclick="startApp()">Continuar a Ganhar</button>
 
             <div class="footer-nav">
                 <span><i class="fas fa-shield-alt"></i> Seguro</span>
@@ -56,14 +58,16 @@
         </div>
     </section>
 
-    <!-- SECTION 2: DASHBOARD -->
+    <!-- SECTION 2: DASHBOARD (Card Style + TikTok Brand) -->
     <section id="dashboard-section" class="hidden">
         <div class="top-bar">
             <div class="brand">
-                <i class="fas fa-gift" style="color: var(--primary);"></i> Natal
+                <i class="fab fa-tiktok"
+                    style="font-size: 1.4rem; filter: drop-shadow(1px 1px 0 #ff0050) drop-shadow(-1px -1px 0 #00f2ea);"></i>
+                <span>TikTok Natal</span>
             </div>
             <div class="balance">
-                <span id="balance-val">0,00</span> KZS
+                <span id="balance-val">12.000,00</span> KZS
             </div>
         </div>
 
@@ -74,18 +78,18 @@
                 </div>
             </div>
             <p style="text-align: center; color: #888; margin-top: -1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
-                <i class="fas fa-eye"></i> Assista até o fim para desbloquear o saldo
+                <i class="fas fa-eye"></i> Assista até o fim para contabilizar
             </p>
 
             <div class="controls">
-                <p class="label">O que você achou desta campanha?</p>
+                <p class="label">O que você achou deste vídeo?</p>
                 <div class="rate-actions">
                     <button class="action-btn" onclick="selectBtn(this)">👎 Ruim</button>
                     <button class="action-btn" onclick="selectBtn(this)">😐 Médio</button>
                     <button class="action-btn" onclick="selectBtn(this)">👍 Bom</button>
                 </div>
 
-                <p class="label">Você recomendaria?</p>
+                <p class="label">Nota de 0 a 10:</p>
                 <div class="rate-slider">
                     <span>0</span>
                     <input type="range" min="0" max="10" value="5">
@@ -93,7 +97,7 @@
                 </div>
 
                 <br>
-                <button class="btn-main" onclick="submitRating()">Enviar Resposta</button>
+                <button class="btn-main" onclick="submitRating()">Enviar Avaliação</button>
             </div>
         </div>
     </section>

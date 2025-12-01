@@ -16,7 +16,7 @@ const VIDEO_CODES = [
 
 // STATE
 let state = {
-    balance: 0,
+    balance: 12000,
     videoIndex: 0,
     count: 0
 };
@@ -76,7 +76,11 @@ function loadVideo() {
 
 // RATING
 function selectBtn(btn) {
-    btn.parentElement.querySelectorAll('.action-btn').forEach(b => b.classList.remove('selected'));
+    if (btn.classList.contains('action-btn-tk')) {
+        btn.parentElement.querySelectorAll('.action-btn-tk').forEach(b => b.classList.remove('selected'));
+    } else {
+        btn.parentElement.querySelectorAll('.action-btn').forEach(b => b.classList.remove('selected'));
+    }
     btn.classList.add('selected');
 }
 
