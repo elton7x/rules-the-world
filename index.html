@@ -1,15 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
 
-<!doctype html>
-<html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Método Árabe</title>
-    <!-- O script foi removido daqui para ser gerido pelo componente React -->
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações de Natal - Ganhe Recompensas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Snow Container -->
+    <div id="snow-container"></div>
+
+    <!-- Notification Banner -->
+    <div id="notification-banner" class="notify-banner">
+        <span id="notify-text">João sacou 15.000 KZS</span>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup-overlay hidden">
+        <div class="popup-box">
+            <div class="coin">💰</div>
+            <h2>Parabéns!</h2>
+            <p>Você ganhou</p>
+            <h1 id="popup-amount" style="color: var(--gold); margin: 10px 0;">15.000 KZS</h1>
+            <p>Adicionado ao seu saldo.</p>
+        </div>
+    </div>
+
+    <!-- SECTION 1: LOGIN / HERO -->
+    <section id="login-section" class="active">
+        <div class="card">
+            <div class="logo-area">
+                <i class="fas fa-gift logo-icon"></i>
+                <div class="santa-hat">🎅</div>
+            </div>
+            <h1>Natal Premiado</h1>
+            <p class="subtitle">Avalie Marcas & Ganhe</p>
+            <p class="desc">Participe da nossa pesquisa oficial de Natal e receba recompensas em dinheiro
+                instantaneamente via Multicaixa Express.</p>
+
+            <div class="input-box">
+                <input type="text" id="login-input" placeholder="Digite seu nome completo...">
+            </div>
+
+            <button class="btn-main" onclick="startApp()">Começar Avaliações</button>
+
+            <div class="footer-nav">
+                <span><i class="fas fa-shield-alt"></i> Seguro</span>
+                <span><i class="fas fa-check-circle"></i> Oficial</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: DASHBOARD -->
+    <section id="dashboard-section" class="hidden">
+        <div class="top-bar">
+            <div class="brand">
+                <i class="fas fa-gift" style="color: var(--primary);"></i> Natal
+            </div>
+            <div class="balance">
+                <span id="balance-val">0,00</span> KZS
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="video-wrapper">
+                <div id="video-slot">
+                    <!-- Video will be loaded here -->
+                </div>
+            </div>
+            <p style="text-align: center; color: #888; margin-top: -1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                <i class="fas fa-eye"></i> Assista até o fim para desbloquear o saldo
+            </p>
+
+            <div class="controls">
+                <p class="label">O que você achou desta campanha?</p>
+                <div class="rate-actions">
+                    <button class="action-btn" onclick="selectBtn(this)">👎 Ruim</button>
+                    <button class="action-btn" onclick="selectBtn(this)">😐 Médio</button>
+                    <button class="action-btn" onclick="selectBtn(this)">👍 Bom</button>
+                </div>
+
+                <p class="label">Você recomendaria?</p>
+                <div class="rate-slider">
+                    <span>0</span>
+                    <input type="range" min="0" max="10" value="5">
+                    <span>10</span>
+                </div>
+
+                <br>
+                <button class="btn-main" onclick="submitRating()">Enviar Resposta</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: LIMIT REACHED -->
+    <section id="limit-section" class="hidden">
+        <div class="card">
+            <div class="logo-area">
+                <i class="fas fa-trophy logo-icon" style="color: var(--gold);"></i>
+            </div>
+            <h1>Limite Atingido!</h1>
+            <p class="subtitle">Parabéns!</p>
+            <p class="desc">Você completou todas as avaliações disponíveis para hoje.</p>
+
+            <div class="alert-box">
+                Saldo Total: <br>
+                <span id="balance-val-final" style="font-size: 1.5rem; color: black;">0,00</span> KZS
+            </div>
+
+            <button class="btn-main" onclick="showWithdraw()">Realizar Saque</button>
+        </div>
+    </section>
+
+    <!-- SECTION 4: WITHDRAW -->
+    <section id="withdraw-section" class="hidden">
+        <div class="card">
+            <h1>Solicitar Saque</h1>
+            <p class="desc">Escolha onde deseja receber seu pagamento.</p>
+
+            <div class="methods">
+                <div class="method active" onclick="selectMethod(this)">
+                    <i class="fas fa-mobile-alt"></i>
+                    Express
+                </div>
+                <div class="method" onclick="selectMethod(this)">
+                    <i class="fas fa-university"></i>
+                    IBAN
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label style="display:block; text-align:left; margin-bottom:5px; color:#888; font-size:0.9rem;">Chave /
+                    IBAN</label>
+                <input type="text" id="iban-input" placeholder="0000.0000.0000.0000">
+            </div>
+
+            <div class="alert-box"
+                style="background: rgba(0, 242, 234, 0.1); border-color: var(--secondary); color: var(--secondary);">
+                Valor a receber: <br>
+                <span id="final-amount-display" style="font-size: 1.4rem; color: white;">0,00 KZS</span>
+            </div>
+
+            <button class="btn-main" onclick="processWithdraw()">Sacar Agora</button>
+        </div>
+    </section>
+
+    <!-- SECTION 5: ERROR / FEE -->
+    <section id="error-section" class="hidden">
+        <div class="card error-card">
+            <div class="error-circle">!</div>
+            <h1>Atenção Necessária</h1>
+            <p class="desc">Detectamos uma pendência no seu cadastro.</p>
+
+            <div class="alert-box">
+                Saldo Retido: <br>
+                <span id="error-amount" style="font-size: 1.5rem; color: black;">0,00 KZS</span>
+            </div>
+
+            <div class="info-text">
+                Para liberar seu saque imediatamente, é necessário pagar uma pequena <strong>Taxa de Validação
+                    Anti-Fraude</strong>.
+                <br><br>
+                Isso serve para confirmar que você é um humano real e não um robô. O valor será
+                <strong>reembolsado</strong> junto com seu saque.
+            </div>
+
+            <button class="btn-main">Pagar Taxa e Liberar Saque</button>
+            <button class="btn-white">Ver Vídeo Explicativo</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
 </html>
