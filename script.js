@@ -178,6 +178,29 @@ function showVSL() {
 
     showSection('vsl');
 
+    // Try to prevent video autoplay
+    setTimeout(() => {
+        try {
+            // Try to access SmartPlayer API
+            const smartplayer = window.smartplayer;
+            if (smartplayer && smartplayer.instances) {
+                const playerInstance = smartplayer.instances[0];
+                if (playerInstance && playerInstance.pause) {
+                    playerInstance.pause();
+                }
+            }
+
+            // Also try to pause any video elements
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+        } catch (e) {
+            console.log('Could not control video autoplay:', e);
+        }
+    }, 500);
+
     // Show button after 110 seconds (1 minute and 50 seconds)
     setTimeout(() => {
         const vslButton = document.querySelector('.btn-vsl-clean');
