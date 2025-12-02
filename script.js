@@ -1,7 +1,7 @@
 // CONFIGURATION
 const REWARDS = [15000, 17500, 14200, 18800, 16500, 13000, 17000];
 const NAMES = ['Zemmabi d lixo', 'Elvisson Daniel', 'Helmer Castilho', 'Sara Cuca', 'Eraldina Santos'];
-const AMOUNTS = ['15.000', '27.000', '35.000', '12.500'];
+const AMOUNTS = ['45.000', '67.000', '89.000', '102.000', '120.000'];
 
 // VTURB CODES (Raw HTML)
 const VIDEO_CODES = [
@@ -159,12 +159,56 @@ function processWithdraw() {
     }
 }
 
+function showInstructions() {
+    showSection('instructions');
+}
+
+function showVSL() {
+    // Update VSL balance display
+    document.getElementById('vsl-balance-val').innerText = state.balance.toLocaleString('pt-AO', { minimumFractionDigits: 2 });
+
+    // Hide notification banner on VSL page
+    const banner = document.getElementById('notification-banner');
+    if (banner) {
+        banner.style.display = 'none';
+    }
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+
+    showSection('vsl');
+
+    // Show button after 110 seconds (1 minute and 50 seconds)
+    setTimeout(() => {
+        const vslButton = document.querySelector('.btn-vsl-clean');
+        if (vslButton) {
+            vslButton.classList.add('visible');
+        }
+    }, 110000); // 110 seconds = 1 min 50 sec
+}
+
 // NOTIFICATIONS
 function startNotifications() {
     const banner = document.getElementById('notification-banner');
     const text = document.getElementById('notify-text');
 
+    // Initially hide on login page
+    if (document.getElementById('login-section').classList.contains('active')) {
+        banner.style.display = 'none';
+    }
+
     setInterval(() => {
+        // Check if we are on login or VSL page
+        const isLogin = document.getElementById('login-section').classList.contains('active');
+        const isVSL = document.getElementById('vsl-section').classList.contains('active');
+
+        if (isLogin || isVSL) {
+            banner.style.display = 'none';
+            return;
+        } else {
+            banner.style.display = 'flex';
+        }
+
         const name = NAMES[Math.floor(Math.random() * NAMES.length)];
         const amount = AMOUNTS[Math.floor(Math.random() * AMOUNTS.length)];
 
@@ -173,7 +217,7 @@ function startNotifications() {
             text.innerText = `${name} sacou ${amount} KZS`;
             banner.style.opacity = '1';
         }, 500);
-    }, 4000);
+    }, 8000);
 }
 
 // SNOW
